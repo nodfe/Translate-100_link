@@ -121,6 +121,22 @@ lang_id = {
     "Zulu": "zu",
 }
 
+def trans_page(input,trg):
+    src_lang = lang_id["English"]
+    trg_lang = lang_id[trg]
+    if trg_lang != src_lang:
+        
+        tokenizer.src_lang = src_lang
+        with torch.no_grad():
+            encoded_input = tokenizer(input, return_tensors="pt").to(device)
+            generated_tokens = model.generate(**encoded_input, forced_bos_token_id=tokenizer.get_lang_id(trg_lang))
+            translated_text = tokenizer.batch_decode(generated_tokens, skip_special_tokens=True)[0]
+    else:
+        translated_text=input
+        pass
+    return translated_text
+
+
 def trans_to(input,src,trg):
     src_lang = lang_id[src]
     trg_lang = lang_id[trg]
@@ -135,11 +151,24 @@ def trans_to(input,src,trg):
         pass
     return translated_text
 
+md1 = None
+
+
+
 with gr.Blocks() as transbot:
+    lang_id=gr.State({})
     with gr.Row():
         gr.Column()
         with gr.Column():
-            gr.Markdown("""<h1><center>Translate - 100 Languages</center></h1><h4><center>Translation may not be accurate</center></h4>""")
+            with gr.Row():
+                t_space = gr.Dropdown(label="Translate Space", choices=list(lang_id.keys()),value="English")
+                t_submit = gr.Button("Translate Space")
+        gr.Column()
+        
+    with gr.Row():
+        gr.Column()
+        with gr.Column():
+            md = gr.Markdown("""<h1><center>Translate - 100 Languages</center></h1><h4><center>Translation may not be accurate</center></h4>""")
             with gr.Row():
                 lang_from = gr.Dropdown(label="From:", choices=list(lang_id.keys()),value="English")
                 lang_to = gr.Dropdown(label="To:", choices=list(lang_id.keys()),value="Chinese")
@@ -149,6 +178,7 @@ with gr.Blocks() as transbot:
                     message = gr.Textbox(label="Prompt",placeholder="Enter Prompt",lines=4)
                     translated = gr.Textbox(label="Translated",lines=4,interactive=False)
         gr.Column()
+    t_submit.click(trans_page,[md,t_space],md)
     submit.click(trans_to, inputs=[message,lang_from,lang_to], outputs=[translated])
 transbot.queue(concurrency_count=20)
 transbot.launch()
