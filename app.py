@@ -156,7 +156,7 @@ md1 = None
 
 
 with gr.Blocks() as transbot:
-    lang_id=gr.State({})
+    #lang_id=gr.State({})
     with gr.Row():
         gr.Column()
         with gr.Column():
