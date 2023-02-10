@@ -128,11 +128,10 @@ d_lang = lang_id[21]
 
 def trans_page(input,trg):
     src_lang = d_lang.code
-    if trg_lang != src_lang:
-        for lang in lang_id:
+    for lang in lang_id:
             if lang.name == trg:
                 trg_lang = lang.code
-            
+    if trg_lang != src_lang:
         tokenizer.src_lang = src_lang
         with torch.no_grad():
             encoded_input = tokenizer(input, return_tensors="pt").to(device)
@@ -158,14 +157,14 @@ def trans_page(input,trg):
     """
 
 def trans_to(input,src,trg):
-    src_lang = d_lang.code
+    for lang in lang_id:
+        if lang.name == trg:
+            trg_lang = lang.code    
+    for lang in lang_id:
+        if lang.name == src:
+            src_lang = lang.code       
     if trg_lang != src_lang:
-        for lang in lang_id:
-            if lang.name == trg:
-                trg_lang = lang.code    
-        for lang in lang_id:
-            if lang.name == src:
-                src_lang = lang.code    
+ 
         tokenizer.src_lang = src_lang
         with torch.no_grad():
             encoded_input = tokenizer(input, return_tensors="pt").to(device)
