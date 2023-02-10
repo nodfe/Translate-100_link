@@ -19,13 +19,7 @@ class Language:
         self.name = name
         self.code = code
 
-
-
-
-
-
 lang_id = [
-    "":"",
     Language("Afrikaans", "af"),
     Language("Albanian", "sq"),
     Language("Amharic", "am"),
@@ -67,85 +61,72 @@ lang_id = [
     Language("Irish","ga"),
     Language("Indonesian","id"),
     Language("Igbo","ig"),
-    Language("",""),
-    Language("",""),
-    Language("",""),
-    Language("",""),
-    Language("",""),
-    Language("",""),
-    Language("",""),
-    Language("",""),
-    Language("",""),
-    Language("",""),
-    Language("",""),
-    Language("",""),
-    Language("",""),
-"Iloko": "ilo",
-"Icelandic": "is",
-"Italian": "it",
-"Japanese": "ja",
-"Javanese": "jv",
-"Kazakh": "kk",
-"Central Khmer": "km",
-"Kannada": "kn",
-"Korean": "ko",
-"Luxembourgish": "lb",
-"Ganda": "lg",
-"Lingala": "ln",
-"Lao": "lo",
-"Lithuanian": "lt",
-"Latvian": "lv",
-"Malagasy": "mg",
-"Macedonian": "mk",
-"Malayalam": "ml",
-"Mongolian": "mn",
-"Marathi": "mr",
-"Malay": "ms",
-"Nepali": "ne",
-"Norwegian": "no",
-"Northern Sotho": "ns",
-"Occitan": "oc",
-"Oriya": "or",
-"Panjabi": "pa",
-"Persian": "fa",
-"Polish": "pl",
-"Pushto": "ps",
-"Portuguese": "pt",
-"Romanian": "ro",
-"Russian": "ru",
-"Sindhi": "sd",
-"Sinhala": "si",
-"Slovak": "sk",
-"Slovenian": "sl",
-"Spanish": "es",
-"Somali": "so",
-"Serbian": "sr",
-"Serbian (cyrillic)": "sr",
-"Serbian (latin)": "sr",    
-"Swati": "ss",
-"Sundanese": "su",
-"Swedish": "sv",
-"Swahili": "sw",
-"Tamil": "ta",
-"Thai": "th",
-"Tagalog": "tl",
-"Tswana": "tn",
-"Turkish": "tr",
-"Ukrainian": "uk",
-"Urdu": "ur",
-"Uzbek": "uz",
-"Vietnamese": "vi",
-"Welsh": "cy",
-"Wolof": "wo",
-"Xhosa": "xh",
-"Yiddish": "yi",
-"Yoruba": "yo",
-"Zulu": "zu",
+    Language("Iloko","ilo"),
+    Language("Icelandic","is"),
+    Language("Italian","it"),
+    Language("Japanese","ja"),
+    Language("Javanese","jv"),
+    Language("Kazakh","kk"),
+    Language("Central Khmer","km"),
+    Language("Kannada","kn"),
+    Language("Korean","ko"),
+    Language("Luxembourgish","lb"),
+    Language("Ganda","lg"),
+    Language("Lingala","ln"),
+    Language("Lao","lo"),
+    Language("Lithuanian","lt"),
+    Language("Latvian","lv"),
+    Language("Malagasy","mg"),
+    Language("Macedonian","mk"),
+    Language("Malayalam","ml"),
+    Language("Mongolian","mn"),
+    Language("Marathi","mr"),
+    Language("Malay","ms"),
+    Language("Nepali","ne"),
+    Language("Norwegian","no"),
+    Language("Northern Sotho","ns"),
+    Language("Occitan","oc"),
+    Language("Oriya","or"),
+    Language("Panjabi","pa"),
+    Language("Persian","fa"),
+    Language("Polish","pl"),
+    Language("Pushto","ps"),
+    Language("Portuguese","pt"),
+    Language("Romanian","ro"),
+    Language("Russian","ru"),
+    Language("Sindhi","sd"),
+    Language("Sinhala","si"),
+    Language("Slovak","sk"),
+    Language("Slovenian","sl"),
+    Language("Spanish","es"),
+    Language("Somali","so"),
+    Language("Serbian","sr"),
+    Language("Serbian (cyrillic)","sr"),
+    Language("Serbian (latin)","sr"),
+    Language("Swati","ss"),
+    Language("Sundanese","su"),
+    Language("Swedish","sv"),
+    Language("Swahili","sw"),
+    Language("Tamil","ta"),
+    Language("Thai","th"),
+    Language("Tagalog","tl"),
+    Language("Tswana","tn"),
+    Language("Turkish","tr"),
+    Language("Ukrainian","uk"),
+    Language("Urdu","ur"),
+    Language("Uzbek","uz"),
+    Language("Vietnamese","vi"),
+    Language("Welsh","cy"),
+    Language("Wolof","wo"),
+    Language("Xhosa","xh"),
+    Language("Yiddish","yi"),
+    Language("Yoruba","yo"),
+    Language("Zulu","zu"),
 ]
 
-def trans_page(input,input1,trg):
-    src_lang = lang_id["English"]
-    trg_lang = lang_id[trg]
+def trans_page(input,trg):
+    src_lang = lang_id[21].code
+    trg_lang = lang_id[trg].code
     if trg_lang != src_lang:
         
         tokenizer.src_lang = src_lang
@@ -156,6 +137,7 @@ def trans_page(input,input1,trg):
     else:
         translated_text=input
         pass
+    """    
     if trg_lang != src_lang:
         
         tokenizer.src_lang = src_lang
@@ -167,12 +149,15 @@ def trans_page(input,input1,trg):
     else:
         translated_text1=input1
         pass
-    return translated_text,gr.Dropdown.update(choices=list(translated_text1.keys()))
-
+    #return translated_text,gr.Dropdown.update(choices=list(translated_text1.keys()))
+    return translated_text
+    """
 
 def trans_to(input,src,trg):
-    src_lang = lang_id[src]
-    trg_lang = lang_id[trg]
+    src_lang = lang_id[src].code
+    trg_lang = lang_id[trg].code
+    #src_lang = lang_id[""]
+    #trg_lang = lang_id[trg]
     if trg_lang != src_lang:
         tokenizer.src_lang = src_lang
         with torch.no_grad():
@@ -194,7 +179,8 @@ with gr.Blocks() as transbot:
         gr.Column()
         with gr.Column():
             with gr.Row():
-                t_space = gr.Dropdown(label="Translate Space", choices=list(lang_id.keys()),value="English")
+                t_space = gr.Dropdown(label="Translate Space", choices=(l for l in lang_id),type = "index", value="English")
+                #t_space = gr.Dropdown(label="Translate Space", choices=list(lang_id.keys()),value="English")
                 t_submit = gr.Button("Translate Space")
         gr.Column()
         
@@ -203,8 +189,12 @@ with gr.Blocks() as transbot:
         with gr.Column():
             md = gr.Markdown("""<h1><center>Translate - 100 Languages</center></h1><h4><center>Translation may not be accurate</center></h4>""")
             with gr.Row():
-                lang_from = gr.Dropdown(label="From:", choices=list(lang_id.keys()),value="English")
-                lang_to = gr.Dropdown(label="To:", choices=list(lang_id.keys()),value="Chinese")
+
+                lang_from = gr.Dropdown(label="From:", choices=(l for l in lang_id),value="English")
+                lang_to = gr.Dropdown(label="To:", choices=(l for l in lang_id),value="Chinese")
+                
+                #lang_from = gr.Dropdown(label="From:", choices=list(lang_id.keys()),value="English")
+                #lang_to = gr.Dropdown(label="To:", choices=list(lang_id.keys()),value="Chinese")
             submit = gr.Button("Go")
             with gr.Row():
                 with gr.Column():
