@@ -208,7 +208,7 @@ with gr.Blocks() as transbot:
                     message = gr.Textbox(label="Prompt",placeholder="Enter Prompt",lines=4)
                     translated = gr.Textbox(label="Translated",lines=4,interactive=False)
         gr.Column()
-    t_submit.click(trans_page,[md,lang_from,t_space],[md,lang_from])
+    t_submit.click(trans_page,[md,t_space],[md])
     
     submit.click(trans_to, inputs=[message,lang_from,lang_to], outputs=[translated])
 transbot.queue(concurrency_count=20)
