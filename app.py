@@ -121,7 +121,7 @@ lang_id = {
     "Zulu": "zu",
 }
 
-def trans_page(input,trg):
+def trans_page(input,input1,trg):
     src_lang = lang_id["English"]
     trg_lang = lang_id[trg]
     if trg_lang != src_lang:
@@ -134,7 +134,17 @@ def trans_page(input,trg):
     else:
         translated_text=input
         pass
-    return translated_text
+    if trg_lang != src_lang:
+        
+        tokenizer.src_lang = src_lang
+        with torch.no_grad():
+            encoded_input = tokenizer(input1, return_tensors="pt").to(device)
+            generated_tokens = model.generate(**encoded_input, forced_bos_token_id=tokenizer.get_lang_id(trg_lang))
+            translated_text1 = tokenizer.batch_decode(generated_tokens, skip_special_tokens=True)[0]
+    else:
+        translated_text1=input1
+        pass
+    return translated_text,translated_text1
 
 
 def trans_to(input,src,trg):
@@ -156,7 +166,7 @@ md1 = "Translate - 100 Languages"
 
 
 with gr.Blocks() as transbot:
-    this=gr.State()
+    #this=gr.State()
     with gr.Row():
         gr.Column()
         with gr.Column():
@@ -178,7 +188,8 @@ with gr.Blocks() as transbot:
                     message = gr.Textbox(label="Prompt",placeholder="Enter Prompt",lines=4)
                     translated = gr.Textbox(label="Translated",lines=4,interactive=False)
         gr.Column()
-    t_submit.click(trans_page,[this,t_space],[this])
+    t_submit.click(trans_page,[md,lang_from,t_space],[md,lang_from])
+    
     submit.click(trans_to, inputs=[message,lang_from,lang_to], outputs=[translated])
 transbot.queue(concurrency_count=20)
 transbot.launch()
