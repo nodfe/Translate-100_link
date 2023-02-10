@@ -153,8 +153,8 @@ def trans_page(input,trg):
         translated_text1=input1
         pass
     #return translated_text,gr.Dropdown.update(choices=list(translated_text1.keys()))
-    return translated_text
     """
+    return translated_text
 
 def trans_to(input,src,trg):
     for lang in lang_id:
