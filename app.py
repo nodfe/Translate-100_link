@@ -138,7 +138,8 @@ def trans_page(input,input1,trg):
         
         tokenizer.src_lang = src_lang
         with torch.no_grad():
-            encoded_input = tokenizer(lang_id[], return_tensors="pt").to(device)
+            #lang_tr = lang_id
+            encoded_input = tokenizer(lang_id, return_tensors="pt").to(device)
             generated_tokens = model.generate(**encoded_input, forced_bos_token_id=tokenizer.get_lang_id(trg_lang))
             translated_text1 = tokenizer.batch_decode(generated_tokens, skip_special_tokens=True)[0]
     else:
