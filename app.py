@@ -123,12 +123,16 @@ lang_id = [
     Language("Yoruba","yo"),
     Language("Zulu","zu"),
 ]
+d_lang = lang_id[21]
+#d_lang_code = d_lang.code
 
 def trans_page(input,trg):
-    src_lang = lang_id[21].code
-    trg_lang = lang_id[trg].code
+    src_lang = d_lang.code
     if trg_lang != src_lang:
-        
+            for lang in lang_id:
+                if lang.name == trg:
+                    trg_lang = lang.code
+            
         tokenizer.src_lang = src_lang
         with torch.no_grad():
             encoded_input = tokenizer(input, return_tensors="pt").to(device)
@@ -154,11 +158,14 @@ def trans_page(input,trg):
     """
 
 def trans_to(input,src,trg):
-    src_lang = lang_id[src].code
-    trg_lang = lang_id[trg].code
-    #src_lang = lang_id[""]
-    #trg_lang = lang_id[trg]
+    src_lang = d_lang.code
     if trg_lang != src_lang:
+        for lang in lang_id:
+            if lang.name == trg:
+                trg_lang = lang.code    
+        for lang in lang_id:
+            if lang.name == src:
+                src_lang = lang.code    
         tokenizer.src_lang = src_lang
         with torch.no_grad():
             encoded_input = tokenizer(input, return_tensors="pt").to(device)
@@ -179,7 +186,7 @@ with gr.Blocks() as transbot:
         gr.Column()
         with gr.Column():
             with gr.Row():
-                t_space = gr.Dropdown(label="Translate Space", choices=(l.name for l in lang_id), value="English")
+                t_space = gr.Dropdown(label="Translate Space", choices=[l.name for l in lang_id], value="English")
                 #t_space = gr.Dropdown(label="Translate Space", choices=list(lang_id.keys()),value="English")
                 t_submit = gr.Button("Translate Space")
         gr.Column()
@@ -190,8 +197,8 @@ with gr.Blocks() as transbot:
             md = gr.Markdown("""<h1><center>Translate - 100 Languages</center></h1><h4><center>Translation may not be accurate</center></h4>""")
             with gr.Row():
 
-                lang_from = gr.Dropdown(label="From:", choices=(l.name for l in lang_id),value="English")
-                lang_to = gr.Dropdown(label="To:", choices=(l.name for l in lang_id),value="Chinese")
+                lang_from = gr.Dropdown(label="From:", choices=[l.name for l in lang_id],value="English")
+                lang_to = gr.Dropdown(label="To:", choices=[l.name for l in lang_id],value="Chinese")
                 
                 #lang_from = gr.Dropdown(label="From:", choices=list(lang_id.keys()),value="English")
                 #lang_to = gr.Dropdown(label="To:", choices=list(lang_id.keys()),value="Chinese")
