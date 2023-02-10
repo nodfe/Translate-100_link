@@ -179,7 +179,7 @@ with gr.Blocks() as transbot:
         gr.Column()
         with gr.Column():
             with gr.Row():
-                t_space = gr.Dropdown(label="Translate Space", choices=(l.name for l in lang_id),type = "index", value="English")
+                t_space = gr.Dropdown(label="Translate Space", choices=(l.name for l in lang_id), value="English")
                 #t_space = gr.Dropdown(label="Translate Space", choices=list(lang_id.keys()),value="English")
                 t_submit = gr.Button("Translate Space")
         gr.Column()
