@@ -168,7 +168,7 @@ with gr.Blocks() as transbot:
     with gr.Row():
         gr.Column()
         with gr.Column():
-            md = gr.Markdown("""<h1><center>{md1}</center></h1><h4><center>Translation may not be accurate</center></h4>""")
+            md = gr.Markdown(""f"<h1><center>{md1}</center></h1><h4><center>Translation may not be accurate</center></h4>""")
             with gr.Row():
                 lang_from = gr.Dropdown(label="From:", choices=list(lang_id.keys()),value="English")
                 lang_to = gr.Dropdown(label="To:", choices=list(lang_id.keys()),value="Chinese")
