@@ -156,7 +156,7 @@ md1 = "Translate - 100 Languages"
 
 
 with gr.Blocks() as transbot:
-    #lang_id=gr.State({})
+    this=gr.State()
     with gr.Row():
         gr.Column()
         with gr.Column():
@@ -168,7 +168,7 @@ with gr.Blocks() as transbot:
     with gr.Row():
         gr.Column()
         with gr.Column():
-            md = gr.Markdown(""f"<h1><center>{md1}</center></h1><h4><center>Translation may not be accurate</center></h4>""")
+            md = gr.Markdown("""<h1><center>Translate - 100 Languages</center></h1><h4><center>Translation may not be accurate</center></h4>""")
             with gr.Row():
                 lang_from = gr.Dropdown(label="From:", choices=list(lang_id.keys()),value="English")
                 lang_to = gr.Dropdown(label="To:", choices=list(lang_id.keys()),value="Chinese")
@@ -178,7 +178,7 @@ with gr.Blocks() as transbot:
                     message = gr.Textbox(label="Prompt",placeholder="Enter Prompt",lines=4)
                     translated = gr.Textbox(label="Translated",lines=4,interactive=False)
         gr.Column()
-    t_submit.click(trans_page,[md,t_space],md)
+    t_submit.click(trans_page,[this,t_space],[this])
     submit.click(trans_to, inputs=[message,lang_from,lang_to], outputs=[translated])
 transbot.queue(concurrency_count=20)
 transbot.launch()
