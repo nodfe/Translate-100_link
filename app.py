@@ -212,4 +212,5 @@ with gr.Blocks() as transbot:
     
     submit.click(trans_to, inputs=[message,lang_from,lang_to], outputs=[translated])
 transbot.queue(concurrency_count=20)
-transbot.launch()
+transbot.launch(share=True)
+
