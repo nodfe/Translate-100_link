@@ -4,7 +4,6 @@ import torch
 import gradio as gr
 from transformers import M2M100Tokenizer, M2M100ForConditionalGeneration
 
-
 if torch.cuda.is_available():
     device = torch.device("cuda:0")
 else:
