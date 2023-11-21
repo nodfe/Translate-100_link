@@ -1,3 +1,5 @@
-torch
+torch==2.0.1
 transformers
 transformers[sentencepiece]
+gradio
+openxlab

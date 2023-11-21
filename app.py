@@ -1,19 +1,8 @@
-import gradio as gr
-import os
 import torch
 import gradio as gr
 from transformers import M2M100Tokenizer, M2M100ForConditionalGeneration
+from openxlab.model import download
 
-if torch.cuda.is_available():
-    device = torch.device("cuda:0")
-else:
-    device = torch.device("cpu")
-
-tokenizer = M2M100Tokenizer.from_pretrained("facebook/m2m100_1.2B")
-model = M2M100ForConditionalGeneration.from_pretrained("facebook/m2m100_1.2B").to(device)
-model.eval()
-
-l1="Afrikaans"
 class Language:
     def __init__(self, name, code):
         self.name = name
@@ -159,12 +148,12 @@ def trans_page(input,trg):
 def trans_to(input,src,trg):
     for lang in lang_id:
         if lang.name == trg:
-            trg_lang = lang.code    
+            trg_lang = lang.code
     for lang in lang_id:
         if lang.name == src:
-            src_lang = lang.code       
+            src_lang = lang.code
     if trg_lang != src_lang:
- 
+
         tokenizer.src_lang = src_lang
         with torch.no_grad():
             encoded_input = tokenizer(input, return_tensors="pt").to(device)
@@ -175,8 +164,38 @@ def trans_to(input,src,trg):
         pass
     return translated_text
 
+
+def download_models():
+    # download models from openxlab-models by openxlab sdk
+    pass
+
+
 md1 = "Translate - 100 Languages"
 
+# if torch.cuda.is_available():
+#     device = torch.device("cuda:0")
+# else:
+#     device = torch.device("cpu")
+device = torch.device("cpu")
+
+print("start to download models from xlab-models")
+models_path = "/home/xlab-app-center/.cache/huggingface/hub/models--facebook--m2m100_1.2B"
+download(model_repo='xj/facebook_100-Translate_1.2billion', model_name='config', output=models_path)
+download(model_repo='xj/facebook_100-Translate_1.2billion', model_name='generation_config', output=models_path)
+download(model_repo='xj/facebook_100-Translate_1.2billion', model_name='pytorch_model', output=models_path)
+download(model_repo='xj/facebook_100-Translate_1.2billion', model_name='sentencepiece.bpe.model', output=models_path)
+download(model_repo='xj/facebook_100-Translate_1.2billion', model_name='special_tokens_map', output=models_path)
+download(model_repo='xj/facebook_100-Translate_1.2billion', model_name='tokenizer_config', output=models_path)
+download(model_repo='xj/facebook_100-Translate_1.2billion', model_name='vocab', output=models_path)
+print("end to download models from xlab-models")
+
+
+
+tokenizer = M2M100Tokenizer.from_pretrained(models_path)
+model = M2M100ForConditionalGeneration.from_pretrained(models_path).to(device)
+model.eval()
+
+l1="Afrikaans"
 
 
 with gr.Blocks() as transbot:
@@ -189,7 +208,7 @@ with gr.Blocks() as transbot:
                 #t_space = gr.Dropdown(label="Translate Space", choices=list(lang_id.keys()),value="English")
                 t_submit = gr.Button("Translate Space")
         gr.Column()
-        
+
     with gr.Row():
         gr.Column()
         with gr.Column():
@@ -198,7 +217,7 @@ with gr.Blocks() as transbot:
 
                 lang_from = gr.Dropdown(label="From:", choices=[l.name for l in lang_id],value="Chinese")
                 lang_to = gr.Dropdown(label="To:", choices=[l.name for l in lang_id],value="English")
-                
+
                 #lang_from = gr.Dropdown(label="From:", choices=list(lang_id.keys()),value="English")
                 #lang_to = gr.Dropdown(label="To:", choices=list(lang_id.keys()),value="Chinese")
             submit = gr.Button("Go")
@@ -208,8 +227,12 @@ with gr.Blocks() as transbot:
                     translated = gr.Textbox(label="Translated",lines=4,interactive=False)
         gr.Column()
     t_submit.click(trans_page,[md,t_space],[md])
-    
-    submit.click(trans_to, inputs=[message,lang_from,lang_to], outputs=[translated])
-transbot.queue(concurrency_count=20)
-transbot.launch()
 
+    submit.click(trans_to, inputs=[message,lang_from,lang_to], outputs=[translated])
+
+def launch_app():
+    transbot.queue()
+    transbot.launch(server_name="0.0.0.0", server_port=7860)
+
+if __name__ == "__main__":
+    launch_app()
