@@ -189,7 +189,8 @@ if torch.cuda.is_available():
 else:
     device = torch.device("cpu")
 
-models_path = "/data/huggingface/facebook-100translate/1.2b"
+# models_path = "/data/huggingface/facebook-100translate/1.2b"
+models_path = "/home/xlab-app-center/.cache/model/xj_facebook_100-Translate_1.2billion"
 # download_models(models_path)
 
 
