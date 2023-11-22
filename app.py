@@ -146,6 +146,7 @@ def trans_page(input,trg):
     return translated_text
 
 def trans_to(input,src,trg):
+    print(f"input={input}, src={src}, target={trg}")
     for lang in lang_id:
         if lang.name == trg:
             trg_lang = lang.code
@@ -153,12 +154,14 @@ def trans_to(input,src,trg):
         if lang.name == src:
             src_lang = lang.code
     if trg_lang != src_lang:
-
         tokenizer.src_lang = src_lang
         with torch.no_grad():
             encoded_input = tokenizer(input, return_tensors="pt").to(device)
+            print(f"encoded_input = {encoded_input}")
             generated_tokens = model.generate(**encoded_input, forced_bos_token_id=tokenizer.get_lang_id(trg_lang))
+            print(f"generated_tokens = {generated_tokens}")
             translated_text = tokenizer.batch_decode(generated_tokens, skip_special_tokens=True)[0]
+            print(f"translated_text = {translated_text}")
     else:
         translated_text=input
         pass
@@ -181,18 +184,19 @@ def download_models(models_path: str):
 md1 = "Translate - 100 Languages"
 
 if torch.cuda.is_available():
-    device = torch.device("cuda:0")
+    # device = torch.device("cuda:0")
+    device = torch.device("cpu")
 else:
     device = torch.device("cpu")
 
-# models_path = "/data/huggingface/facebook-100translate/1.2b"
+models_path = "/data/huggingface/facebook-100translate/1.2b"
 # download_models(models_path)
 
 
 
 
-tokenizer = M2M100Tokenizer.from_pretrained("facebook/m2m100_1.2B")
-model = M2M100ForConditionalGeneration.from_pretrained("facebook/m2m100_1.2B").to(device)
+tokenizer = M2M100Tokenizer.from_pretrained(models_path)
+model = M2M100ForConditionalGeneration.from_pretrained(models_path).to(device)
 model.eval()
 
 l1="Afrikaans"
