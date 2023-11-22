@@ -10,107 +10,105 @@ class Language:
 
 lang_id = [
     Language("Afrikaans", "af"),
-    Language("Albanian", "sq"),
-    Language("Amharic", "am"),
-    Language("Arabic", "ar"),
-    Language("Armenian", "hy"),
-    Language("Asturian", "ast"),
-    Language("Azerbaijani", "az"),
-    Language("Bashkir", "ba"),
-    Language("Belarusian", "be"),
-    Language("Bulgarian", "bg"),
-    Language("Bengali", "bn"),
-    Language("Breton", "br"),
-    Language("Bosnian", "bs"),
-    Language("Burmese", "my"),
-    Language("Catalan", "ca"),
-    Language("Cebuano", "ceb"),
-    Language("Chinese","zh"),
-    Language("Croatian","hr"),
-    Language("Czech","cs"),
-    Language("Danish","da"),
-    Language("Dutch","nl"),
-    Language("English","en"),
-    Language("Estonian","et"),
-    Language("Fulah","ff"),
-    Language("Finnish","fi"),
-    Language("French","fr"),
-    Language("Western Frisian","fy"),
-    Language("Gaelic","gd"),
-    Language("Galician","gl"),
-    Language("Georgian","ka"),
-    Language("German","de"),
-    Language("Greek","el"),
-    Language("Gujarati","gu"),
-    Language("Hausa","ha"),
-    Language("Hebrew","he"),
-    Language("Hindi","hi"),
-    Language("Haitian","ht"),
-    Language("Hungarian","hu"),
-    Language("Irish","ga"),
-    Language("Indonesian","id"),
-    Language("Igbo","ig"),
-    Language("Iloko","ilo"),
-    Language("Icelandic","is"),
-    Language("Italian","it"),
-    Language("Japanese","ja"),
-    Language("Javanese","jv"),
-    Language("Kazakh","kk"),
-    Language("Central Khmer","km"),
-    Language("Kannada","kn"),
-    Language("Korean","ko"),
-    Language("Luxembourgish","lb"),
-    Language("Ganda","lg"),
-    Language("Lingala","ln"),
-    Language("Lao","lo"),
-    Language("Lithuanian","lt"),
-    Language("Latvian","lv"),
-    Language("Malagasy","mg"),
-    Language("Macedonian","mk"),
-    Language("Malayalam","ml"),
-    Language("Mongolian","mn"),
-    Language("Marathi","mr"),
-    Language("Malay","ms"),
-    Language("Nepali","ne"),
-    Language("Norwegian","no"),
-    Language("Northern Sotho","ns"),
-    Language("Occitan","oc"),
-    Language("Oriya","or"),
-    Language("Panjabi","pa"),
-    Language("Persian","fa"),
-    Language("Polish","pl"),
-    Language("Pushto","ps"),
-    Language("Portuguese","pt"),
-    Language("Romanian","ro"),
-    Language("Russian","ru"),
-    Language("Sindhi","sd"),
-    Language("Sinhala","si"),
-    Language("Slovak","sk"),
-    Language("Slovenian","sl"),
-    Language("Spanish","es"),
-    Language("Somali","so"),
-    Language("Serbian","sr"),
-    Language("Serbian (cyrillic)","sr"),
-    Language("Serbian (latin)","sr"),
-    Language("Swati","ss"),
-    Language("Sundanese","su"),
-    Language("Swedish","sv"),
-    Language("Swahili","sw"),
-    Language("Tamil","ta"),
-    Language("Thai","th"),
-    Language("Tagalog","tl"),
-    Language("Tswana","tn"),
-    Language("Turkish","tr"),
-    Language("Ukrainian","uk"),
-    Language("Urdu","ur"),
-    Language("Uzbek","uz"),
-    Language("Vietnamese","vi"),
-    Language("Welsh","cy"),
-    Language("Wolof","wo"),
-    Language("Xhosa","xh"),
-    Language("Yiddish","yi"),
-    Language("Yoruba","yo"),
-    Language("Zulu","zu"),
+    Language("Shqip", "sq"),  # Albanian
+    Language("አማርኛ", "am"),  # Amharic
+    Language("العربية", "ar"),  # Arabic
+    Language("Հայերեն", "hy"),  # Armenian
+    Language("Asturianu", "ast"),  # Asturian
+    Language("Azərbaycanca", "az"),  # Azerbaijani
+    Language("Башҡортса", "ba"),  # Bashkir
+    Language("Беларуская", "be"),  # Belarusian
+    Language("Български", "bg"),  # Bulgarian
+    Language("বাংলা", "bn"),  # Bengali
+    Language("Brezhoneg", "br"),  # Breton
+    Language("Bosanski", "bs"),  # Bosnian
+    Language("မြန်မာစာ", "my"),  # Burmese
+    Language("Català", "ca"),  # Catalan
+    Language("Cebuano", "ceb"),  # Cebuano
+    Language("中文", "zh"),  # Chinese
+    Language("Hrvatski", "hr"),  # Croatian
+    Language("Čeština", "cs"),  # Czech
+    Language("Dansk", "da"),  # Danish
+    Language("Nederlands", "nl"),  # Dutch
+    Language("English", "en"),  # English
+    Language("Eesti", "et"),  # Estonian
+    Language("Fulfulde", "ff"),  # Fulah
+    Language("Suomi", "fi"),  # Finnish
+    Language("Français", "fr"),  # French
+    Language("Frysk", "fy"),  # Western Frisian
+    Language("Gàidhlig", "gd"),  # Gaelic
+    Language("Galego", "gl"),  # Galician
+    Language("ქართული", "ka"),  # Georgian
+    Language("Deutsch", "de"),  # German
+    Language("Ελληνικά", "el"),  # Greek
+    Language("ગુજરાતી", "gu"),  # Gujarati
+    Language("هَوُسَ", "ha"),  # Hausa
+    Language("עברית", "he"),  # Hebrew
+    Language("हिन्दी", "hi"),  # Hindi
+    Language("Kreyòl ayisyen", "ht"),  # Haitian
+    Language("Magyar", "hu"),  # Hungarian
+    Language("Gaeilge", "ga"),  # Irish
+    Language("Bahasa Indonesia", "id"),  # Indonesian
+    Language("Igbo", "ig"),  # Igbo
+    Language("Ilokano", "ilo"),  # Iloko
+    Language("Íslenska", "is"),  # Icelandic
+    Language("Italiano", "it"),  # Italian
+    Language("日本語", "ja"),  # Japanese
+    Language("Basa Jawa", "jv"),  # Javanese
+    Language("Қазақша", "kk"),  # Kazakh
+    Language("ភាសាខ្មែរ", "km"),  # Central Khmer
+    Language("ಕನ್ನಡ", "kn"),  # Kannada
+    Language("한국어", "ko"),  # Korean
+    Language("Lëtzebuergesch", "lb"),  # Luxembourgish
+    Language("Luganda", "lg"),  # Ganda
+    Language("Lingála", "ln"),  # Lingala
+    Language("ລາວ", "lo"),  # Lao
+    Language("Lietuvių", "lt"),  # Lithuanian
+    Language("Latviešu", "lv"),  # Latvian
+    Language("Malagasy", "mg"),  # Malagasy
+    Language("Македонски", "mk"),  # Macedonian
+    Language("മലയാളം", "ml"),  # Malayalam
+    Language("Монгол", "mn"),  # Mongolian
+    Language("मराठी", "mr"),  # Marathi
+    Language("Bahasa Melayu", "ms"),  # Malay
+    Language("नेपाली", "ne"),  # Nepali
+    Language("Norsk", "no"),  # Norwegian
+    Language("Sesotho sa Leboa", "ns"),  # Northern Sotho
+    Language("Occitan", "oc"),  # Occitan
+    Language("ଓଡ଼ିଆ", "or"),  # Oriya
+    Language("ਪੰਜਾਬੀ", "pa"),  # Panjabi
+    Language("فارسی", "fa"),  # Persian
+    Language("Polski", "pl"),  # Polish
+    Language("پښتو", "ps"),  # Pushto
+    Language("Português", "pt"),  # Portuguese
+    Language("Română", "ro"),  # Romanian
+    Language("Русский", "ru"),  # Russian
+    Language("سنڌي", "sd"),  # Sindhi
+    Language("සිංහල", "si"),  # Sinhala
+    Language("Slovenčina", "sk"),  # Slovak
+    Language("Slovenščina", "sl"),  # Slovenian
+    Language("Español", "es"),  # Spanish
+    Language("Soomaali", "so"),  # Somali
+    Language("Српски / Srpski", "sr"),  # Serbian (both Cyrillic and Latin)
+    Language("SiSwati", "ss"),  # Swati
+    Language("Basa Sunda", "su"),  # Sundanese
+    Language("Svenska", "sv"),  # Swedish
+    Language("Kiswahili", "sw"),  # Swahili
+    Language("தமிழ்", "ta"),  # Tamil
+    Language("ไทย", "th"),  # Thai
+    Language("Tagalog", "tl"),  # Tagalog
+    Language("Setswana", "tn"),  # Tswana
+    Language("Türkçe", "tr"),  # Turkish
+    Language("Українська", "uk"),  # Ukrainian
+    Language("اردو", "ur"),  # Urdu
+    Language("Oʻzbekcha", "uz"),  # Uzbek
+    Language("Tiếng Việt", "vi"),  # Vietnamese
+    Language("Cymraeg", "cy"),  # Welsh
+    Language("Wolof", "wo"),  # Wolof
+    Language("isiXhosa", "xh"),  # Xhosa
+    Language("ייִדיש", "yi"),  # Yiddish
+    Language("Èdè Yorùbá", "yo"),  # Yoruba
+    Language("isiZulu", "zu"),  # Zulu
 ]
 d_lang = lang_id[21]
 #d_lang_code = d_lang.code
@@ -157,11 +155,11 @@ def trans_to(input,src,trg):
         tokenizer.src_lang = src_lang
         with torch.no_grad():
             encoded_input = tokenizer(input, return_tensors="pt").to(device)
-            print(f"encoded_input = {encoded_input}")
+            # print(f"encoded_input = {encoded_input}")
             generated_tokens = model.generate(**encoded_input, forced_bos_token_id=tokenizer.get_lang_id(trg_lang))
-            print(f"generated_tokens = {generated_tokens}")
+            # print(f"generated_tokens = {generated_tokens}")
             translated_text = tokenizer.batch_decode(generated_tokens, skip_special_tokens=True)[0]
-            print(f"translated_text = {translated_text}")
+            # print(f"translated_text = {translated_text}")
     else:
         translated_text=input
         pass
@@ -184,16 +182,14 @@ def download_models(models_path: str):
 md1 = "Translate - 100 Languages"
 
 if torch.cuda.is_available():
-    # device = torch.device("cuda:0")
-    device = torch.device("cpu")
+    device = torch.device("cuda:0")
+    # device = torch.device("cpu")
 else:
     device = torch.device("cpu")
 
 # models_path = "/data/huggingface/facebook-100translate/1.2b"
 models_path = "/home/xlab-app-center/.cache/model/xj_facebook_100-Translate_1.2billion"
 # download_models(models_path)
-
-
 
 
 tokenizer = M2M100Tokenizer.from_pretrained(models_path)
@@ -203,35 +199,26 @@ model.eval()
 l1="Afrikaans"
 
 
-with gr.Blocks() as transbot:
+with gr.Blocks(title="百语翻译-应用中心-OpenXLab", theme="soft") as transbot:
     #this=gr.State()
+    # with gr.Row():
+    #     gr.Column()
+    #     with gr.Column():
+    #         with gr.Row():
+    #             t_space = gr.Dropdown(label="Translate Space", choices=[l.name for l in lang_id], value="Chinese")
+    #             #t_space = gr.Dropdown(label="Translate Space", choices=list(lang_id.keys()),value="English")
+    #             t_submit = gr.Button("Translate Space")
+    #     gr.Column()
+    md = gr.Markdown("""<h1><center>百语翻译</center></h1><h4><center>基于Facebook开源模型: m2m100_1.2B</center></h4>""")
     with gr.Row():
-        gr.Column()
         with gr.Column():
-            with gr.Row():
-                t_space = gr.Dropdown(label="Translate Space", choices=[l.name for l in lang_id], value="Chinese")
-                #t_space = gr.Dropdown(label="Translate Space", choices=list(lang_id.keys()),value="English")
-                t_submit = gr.Button("Translate Space")
-        gr.Column()
-
-    with gr.Row():
-        gr.Column()
+            lang_from = gr.Dropdown(show_label=False, choices=[l.name for l in lang_id],value="English")
+            message = gr.Textbox(label="原文", placeholder="请输入原文", lines=4)
         with gr.Column():
-            md = gr.Markdown("""<h1><center>Translate - 100 Languages</center></h1><h4><center>Translation may not be accurate</center></h4>""")
-            with gr.Row():
-
-                lang_from = gr.Dropdown(label="From:", choices=[l.name for l in lang_id],value="Chinese")
-                lang_to = gr.Dropdown(label="To:", choices=[l.name for l in lang_id],value="English")
-
-                #lang_from = gr.Dropdown(label="From:", choices=list(lang_id.keys()),value="English")
-                #lang_to = gr.Dropdown(label="To:", choices=list(lang_id.keys()),value="Chinese")
-            submit = gr.Button("Go")
-            with gr.Row():
-                with gr.Column():
-                    message = gr.Textbox(label="Prompt",placeholder="Enter Prompt",lines=4)
-                    translated = gr.Textbox(label="Translated",lines=4,interactive=False)
-        gr.Column()
-    t_submit.click(trans_page,[md,t_space],[md])
+            lang_to = gr.Dropdown(show_label=False, choices=[l.name for l in lang_id],value="中文")
+            translated = gr.Textbox(label="翻译", lines=4, interactive=False)
+    with gr.Column():
+        submit = gr.Button(value="翻译", variant="primary")
     submit.click(trans_to, inputs=[message,lang_from,lang_to], outputs=[translated])
 
 def launch_app():
