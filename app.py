@@ -184,13 +184,13 @@ def download_models(models_path: str):
 md1 = "Translate - 100 Languages"
 
 if torch.cuda.is_available():
-    # device = torch.device("cuda:0")
-    device = torch.device("cpu")
+    device = torch.device("cuda:0")
+    # device = torch.device("cpu")
 else:
     device = torch.device("cpu")
 
-models_path = "/data/huggingface/facebook-100translate/1.2b"
-# models_path = "/home/xlab-app-center/.cache/model/xj_facebook_100-Translate_1.2billion"
+# models_path = "/data/huggingface/facebook-100translate/12b"
+models_path = "/home/xlab-app-center/.cache/model/xj_facebook_100-Translate_1.2billion"
 # download_models(models_path)
 
 
