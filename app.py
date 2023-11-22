@@ -167,6 +167,7 @@ def trans_to(input,src,trg):
 
 def download_models(models_path: str):
     # download models from openxlab-models by openxlab sdk
+    print("start to download models from xlab-models")
     download(model_repo='xj/facebook_100-Translate_1.2billion', model_name='config', output=models_path)
     download(model_repo='xj/facebook_100-Translate_1.2billion', model_name='generation_config', output=models_path)
     download(model_repo='xj/facebook_100-Translate_1.2billion', model_name='pytorch_model', output=models_path)
@@ -174,21 +175,19 @@ def download_models(models_path: str):
     download(model_repo='xj/facebook_100-Translate_1.2billion', model_name='special_tokens_map', output=models_path)
     download(model_repo='xj/facebook_100-Translate_1.2billion', model_name='tokenizer_config', output=models_path)
     download(model_repo='xj/facebook_100-Translate_1.2billion', model_name='vocab', output=models_path)
-    pass
+    print("end to download models from xlab-models")
 
 
 md1 = "Translate - 100 Languages"
 
-# if torch.cuda.is_available():
-#     device = torch.device("cuda:0")
-# else:
-device = torch.device("cpu")
+if torch.cuda.is_available():
+    device = torch.device("cuda:0")
+else:
+    device = torch.device("cpu")
 
-#     device = torch.device("cpu")
-# print("start to download models from xlab-models")
 # models_path = "/data/huggingface/facebook-100translate/1.2b"
 # download_models(models_path)
-# print("end to download models from xlab-models")
+
 
 
 
