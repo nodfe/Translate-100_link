@@ -1,5 +1,5 @@
 torch==1.11.0
 transformers
 transformers[sentencepiece]
-gradio
+gradio==4.2.0
 openxlab
