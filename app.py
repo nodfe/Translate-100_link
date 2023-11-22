@@ -145,6 +145,8 @@ def trans_page(input,trg):
 
 def trans_to(input,src,trg):
     print(f"input={input}, src={src}, target={trg}")
+    if not input:
+        return ""
     for lang in lang_id:
         if lang.name == trg:
             trg_lang = lang.code
@@ -182,13 +184,13 @@ def download_models(models_path: str):
 md1 = "Translate - 100 Languages"
 
 if torch.cuda.is_available():
-    device = torch.device("cuda:0")
-    # device = torch.device("cpu")
+    # device = torch.device("cuda:0")
+    device = torch.device("cpu")
 else:
     device = torch.device("cpu")
 
-# models_path = "/data/huggingface/facebook-100translate/1.2b"
-models_path = "/home/xlab-app-center/.cache/model/xj_facebook_100-Translate_1.2billion"
+models_path = "/data/huggingface/facebook-100translate/1.2b"
+# models_path = "/home/xlab-app-center/.cache/model/xj_facebook_100-Translate_1.2billion"
 # download_models(models_path)
 
 
@@ -209,7 +211,7 @@ with gr.Blocks(title="百语翻译-应用中心-OpenXLab", theme="soft") as tran
     #             #t_space = gr.Dropdown(label="Translate Space", choices=list(lang_id.keys()),value="English")
     #             t_submit = gr.Button("Translate Space")
     #     gr.Column()
-    md = gr.Markdown("""<h1><center>百语翻译</center></h1><h4><center>基于Facebook开源模型: m2m100_1.2B</center></h4>""")
+    md = gr.HTML("""<h1><center>百语翻译</center></h1><h4><center>基于Facebook开源模型: <a href="https://openxlab.org.cn/models/detail/xj/facebook_100-Translate_1.2billion">m2m100_1.2B</a></center></h4>""")
     with gr.Row():
         with gr.Column():
             lang_from = gr.Dropdown(show_label=False, choices=[l.name for l in lang_id],value="English")
