@@ -232,11 +232,9 @@ with gr.Blocks() as transbot:
                     translated = gr.Textbox(label="Translated",lines=4,interactive=False)
         gr.Column()
     t_submit.click(trans_page,[md,t_space],[md])
-
     submit.click(trans_to, inputs=[message,lang_from,lang_to], outputs=[translated])
 
 def launch_app():
-    transbot.queue()
     transbot.launch(server_name="0.0.0.0", server_port=7860)
 
 if __name__ == "__main__":
