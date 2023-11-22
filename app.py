@@ -165,8 +165,15 @@ def trans_to(input,src,trg):
     return translated_text
 
 
-def download_models():
+def download_models(models_path: str):
     # download models from openxlab-models by openxlab sdk
+    download(model_repo='xj/facebook_100-Translate_1.2billion', model_name='config', output=models_path)
+    download(model_repo='xj/facebook_100-Translate_1.2billion', model_name='generation_config', output=models_path)
+    download(model_repo='xj/facebook_100-Translate_1.2billion', model_name='pytorch_model', output=models_path)
+    download(model_repo='xj/facebook_100-Translate_1.2billion', model_name='sentencepiece.bpe.model', output=models_path)
+    download(model_repo='xj/facebook_100-Translate_1.2billion', model_name='special_tokens_map', output=models_path)
+    download(model_repo='xj/facebook_100-Translate_1.2billion', model_name='tokenizer_config', output=models_path)
+    download(model_repo='xj/facebook_100-Translate_1.2billion', model_name='vocab', output=models_path)
     pass
 
 
@@ -175,24 +182,18 @@ md1 = "Translate - 100 Languages"
 # if torch.cuda.is_available():
 #     device = torch.device("cuda:0")
 # else:
-#     device = torch.device("cpu")
 device = torch.device("cpu")
 
-print("start to download models from xlab-models")
-models_path = "/home/xlab-app-center/.cache/huggingface/hub/models--facebook--m2m100_1.2B"
-download(model_repo='xj/facebook_100-Translate_1.2billion', model_name='config', output=models_path)
-download(model_repo='xj/facebook_100-Translate_1.2billion', model_name='generation_config', output=models_path)
-download(model_repo='xj/facebook_100-Translate_1.2billion', model_name='pytorch_model', output=models_path)
-download(model_repo='xj/facebook_100-Translate_1.2billion', model_name='sentencepiece.bpe.model', output=models_path)
-download(model_repo='xj/facebook_100-Translate_1.2billion', model_name='special_tokens_map', output=models_path)
-download(model_repo='xj/facebook_100-Translate_1.2billion', model_name='tokenizer_config', output=models_path)
-download(model_repo='xj/facebook_100-Translate_1.2billion', model_name='vocab', output=models_path)
-print("end to download models from xlab-models")
+#     device = torch.device("cpu")
+# print("start to download models from xlab-models")
+# models_path = "/data/huggingface/facebook-100translate/1.2b"
+# download_models(models_path)
+# print("end to download models from xlab-models")
 
 
 
-tokenizer = M2M100Tokenizer.from_pretrained(models_path)
-model = M2M100ForConditionalGeneration.from_pretrained(models_path).to(device)
+tokenizer = M2M100Tokenizer.from_pretrained("facebook/m2m100_1.2B")
+model = M2M100ForConditionalGeneration.from_pretrained("facebook/m2m100_1.2B").to(device)
 model.eval()
 
 l1="Afrikaans"
