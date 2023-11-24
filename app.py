@@ -191,15 +191,6 @@ model.eval()
 
 
 with gr.Blocks(title="百语翻译-应用中心-OpenXLab", theme="soft") as transbot:
-    #this=gr.State()
-    # with gr.Row():
-    #     gr.Column()
-    #     with gr.Column():
-    #         with gr.Row():
-    #             t_space = gr.Dropdown(label="Translate Space", choices=[l.name for l in lang_id], value="Chinese")
-    #             #t_space = gr.Dropdown(label="Translate Space", choices=list(lang_id.keys()),value="English")
-    #             t_submit = gr.Button("Translate Space")
-    #     gr.Column()
     md = gr.HTML("""<h1><center>百语翻译</center></h1><h4><center>基于Facebook开源模型: <a href="https://openxlab.org.cn/models/detail/xj/facebook_100-Translate_1.2billion">m2m100_1.2B</a></center></h4>""")
     with gr.Row():
         with gr.Column():
