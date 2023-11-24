@@ -2,6 +2,7 @@ import torch
 import gradio as gr
 from transformers import M2M100Tokenizer, M2M100ForConditionalGeneration
 from openxlab.model import download
+import os
 
 class Language:
     def __init__(self, name, code):
@@ -143,7 +144,7 @@ def trans_page(input,trg):
     """
     return translated_text
 
-def trans_to(input,src,trg):
+def trans_to(input, src, trg, max_length):
     print(f"input={input}, src={src}, target={trg}")
     if not input:
         return ""
@@ -158,7 +159,7 @@ def trans_to(input,src,trg):
         with torch.no_grad():
             encoded_input = tokenizer(input, return_tensors="pt").to(device)
             # print(f"encoded_input = {encoded_input}")
-            generated_tokens = model.generate(**encoded_input, forced_bos_token_id=tokenizer.get_lang_id(trg_lang))
+            generated_tokens = model.generate(**encoded_input, forced_bos_token_id=tokenizer.get_lang_id(trg_lang), max_length=max_length)
             # print(f"generated_tokens = {generated_tokens}")
             translated_text = tokenizer.batch_decode(generated_tokens, skip_special_tokens=True)[0]
             # print(f"translated_text = {translated_text}")
@@ -171,34 +172,22 @@ def trans_to(input,src,trg):
 def download_models(models_path: str):
     # download models from openxlab-models by openxlab sdk
     print("start to download models from xlab-models")
-    download(model_repo='xj/facebook_100-Translate_1.2billion', model_name='config', output=models_path)
-    download(model_repo='xj/facebook_100-Translate_1.2billion', model_name='generation_config', output=models_path)
-    download(model_repo='xj/facebook_100-Translate_1.2billion', model_name='pytorch_model', output=models_path)
-    download(model_repo='xj/facebook_100-Translate_1.2billion', model_name='sentencepiece.bpe.model', output=models_path)
-    download(model_repo='xj/facebook_100-Translate_1.2billion', model_name='special_tokens_map', output=models_path)
-    download(model_repo='xj/facebook_100-Translate_1.2billion', model_name='tokenizer_config', output=models_path)
-    download(model_repo='xj/facebook_100-Translate_1.2billion', model_name='vocab', output=models_path)
+    download(model_repo='xj/facebook_m2m100_12B', output=models_path)
     print("end to download models from xlab-models")
-
-
-md1 = "Translate - 100 Languages"
 
 if torch.cuda.is_available():
     device = torch.device("cuda:0")
-    # device = torch.device("cpu")
 else:
     device = torch.device("cpu")
 
-# models_path = "/data/huggingface/facebook-100translate/12b"
-models_path = "/home/xlab-app-center/.cache/model/xj_facebook_100-Translate_1.2billion"
-# download_models(models_path)
+pwd = os.getcwd()
+models_path = pwd+"/model/12b"
+download_models(models_path)
 
 
 tokenizer = M2M100Tokenizer.from_pretrained(models_path)
 model = M2M100ForConditionalGeneration.from_pretrained(models_path).to(device)
 model.eval()
-
-l1="Afrikaans"
 
 
 with gr.Blocks(title="百语翻译-应用中心-OpenXLab", theme="soft") as transbot:
@@ -219,9 +208,10 @@ with gr.Blocks(title="百语翻译-应用中心-OpenXLab", theme="soft") as tran
         with gr.Column():
             lang_to = gr.Dropdown(show_label=False, choices=[l.name for l in lang_id],value="中文")
             translated = gr.Textbox(label="翻译", lines=4, interactive=False)
+            max_length = gr.Slider(label="最大输出tokens", minimum=20, maximum=1024000)
     with gr.Column():
         submit = gr.Button(value="翻译", variant="primary")
-    submit.click(trans_to, inputs=[message,lang_from,lang_to], outputs=[translated])
+    submit.click(trans_to, inputs=[message,lang_from,lang_to, max_length], outputs=[translated])
 
 def launch_app():
     transbot.launch(server_name="0.0.0.0", server_port=7860)
